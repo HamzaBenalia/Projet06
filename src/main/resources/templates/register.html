@@ -35,14 +35,14 @@
             </div>
             <div th:if="${param.success}">
                 <div class="alert alert-info">
-                    You have successfully registered our app!
+                    Great ! you have successfully registered to PayMyBuddyApp!
                 </div>
             </div>
             <div class="card-body">
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/register/save}"
+                        th:action="@{/register}"
                         th:object="${userDto}"
                 >
                     <div class="form-group mb-3">

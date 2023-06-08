@@ -1,4 +1,5 @@
 package com.openclassroom.paymybuddy.repository;
+import com.openclassroom.paymybuddy.dto.UserDto;
 import com.openclassroom.paymybuddy.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findByfirstName(String firstName);
 
     Optional<User> findByEmail(String email);
+
+
 }

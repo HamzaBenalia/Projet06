@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pay my buddy - Mybank</title>
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/header.html"></div>
+
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Register My Bank Account</h2>
+                </div>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        Great ! you have successfully saved a bank Account!
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/bank}"
+                            th:object="${bankAccountDto}"
+                    >
+                        <div class="form-group mb-3">
+                            <label class="form-label">Iban</label>
+                            <input
+                                    class="form-control"
+                                    id="iban"
+                                    name="iban"
+                                    placeholder="Enter your iban"
+                                    th:field="*{iban}"
+                                    type="text"
+                            />
+                            <p th:errors = "*{iban}" class="text-danger"
+                               th:if="${#fields.hasErrors('iban')}"></p>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">save My Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

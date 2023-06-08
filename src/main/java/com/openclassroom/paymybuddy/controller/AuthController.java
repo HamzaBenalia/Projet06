@@ -9,9 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AuthController {
@@ -35,35 +35,38 @@ public class AuthController {
     }
 
     // handler method to handle user registration form submit request
-    @PostMapping("/register/save")
+    @PostMapping("/register")
     public String registration(@Valid @ModelAttribute("userDto") UserDto userDto,
                                BindingResult result,
                                Model model) {
-        if (result.hasErrors()) {
-            return "register";
-        }
         User existingUser = userService.findUserByEmail(userDto.getEmail());
 
         if (existingUser != null) {
             result.rejectValue("email", null,
                     "There is already an account registered with the same email");
-            return "register";
-        } else {
-            User user = new User();
-            user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            user.setBalance(0.0);
-            userService.saveUser(user);
-            return "redirect:/register?success";
         }
+
+        if (result.hasErrors()) {
+            model.addAttribute("user", userDto);
+            return "/register";
+        }
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setBalance(0.0);
+        userService.saveUser(user);
+        return "redirect:/register?success";
     }
+
 
     // handler method to handle list of users
     @GetMapping("/users")
     public String users(Model model) {
-        List<User> users = userService.findAll();
+
+        List<UserDto> users = userService.findAll().stream()
+                .map((user) -> mapToUserDto( user))
+                .collect(Collectors.toList());
         model.addAttribute("users", users);
         return "users";
     }
@@ -72,5 +75,13 @@ public class AuthController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    private UserDto mapToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        return userDto;
     }
 }
