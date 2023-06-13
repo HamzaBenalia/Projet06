@@ -32,10 +32,20 @@
                                     name="iban"
                                     placeholder="Enter your iban"
                                     th:field="*{iban}"
-                                    type="text"
+                                    type="text" required
                             />
-                            <p th:errors = "*{iban}" class="text-danger"
-                               th:if="${#fields.hasErrors('iban')}"></p>
+                            <input
+                                    class="form-control"
+                                    id="sold"
+                                    name="dold"
+                                    placeholder="Enter current sold"
+                                    th:field="*{sold}"
+                                    type="number"
+                                    step="0.01" required
+                            />
+
+                            <p th:errors = "*{sold}" class="text-danger"
+                               th:if="${#fields.hasErrors('sold')}"></p>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">save My Account</button>

@@ -1,23 +1,26 @@
 package com.openclassroom.paymybuddy.controller;
 import com.openclassroom.paymybuddy.dto.UserDto;
+import com.openclassroom.paymybuddy.model.Relations;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class AuthController {
+public class AuthenticationController {
 
     @Autowired
     private UserService userService;
+
 
     // handler method to handle home page request
     @GetMapping("/index")
@@ -55,6 +58,7 @@ public class AuthController {
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setBalance(0.0);
+        user.setPassword(userDto.getPassword());
         userService.saveUser(user);
         return "redirect:/register?success";
     }
@@ -65,10 +69,10 @@ public class AuthController {
     public String users(Model model) {
 
         List<UserDto> users = userService.findAll().stream()
-                .map((user) -> mapToUserDto( user))
+                .map((user) -> mapToUserDto(user))
                 .collect(Collectors.toList());
         model.addAttribute("users", users);
-        return "users";
+        return "/users";
     }
 
     // handler method to handle login request
@@ -84,4 +88,5 @@ public class AuthController {
         userDto.setEmail(user.getEmail());
         return userDto;
     }
+
 }

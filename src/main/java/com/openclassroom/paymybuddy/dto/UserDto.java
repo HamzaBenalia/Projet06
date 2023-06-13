@@ -19,5 +19,5 @@ public class UserDto {
     private String email;
     @NotBlank(message = "Password must not be blank")
     private String password;
-
+    private Double balance;
 }

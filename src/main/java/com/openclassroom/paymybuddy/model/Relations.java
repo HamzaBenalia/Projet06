@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "RELATIONS")
 @IdClass(RelationId.class)
 public class Relations {
+
     @Id
     @Column(name = "ID_USER", updatable = false)
     private Integer idUser;
@@ -19,6 +20,4 @@ public class Relations {
     @Id
     @Column(name = "ID_FRIEND", updatable = false)
     private Integer idFriend;
-
-
 }

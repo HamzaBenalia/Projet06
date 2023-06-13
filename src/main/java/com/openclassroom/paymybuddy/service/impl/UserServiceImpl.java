@@ -1,6 +1,5 @@
 package com.openclassroom.paymybuddy.service.impl;
-
-import com.openclassroom.paymybuddy.dto.UserDto;
+import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.UserRepository;
 import com.openclassroom.paymybuddy.service.UserService;
@@ -11,15 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -40,6 +40,21 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User findUserById(String email) {
+        return null;
+    }
+
+    @Override
+    public User findUserById(Integer id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()) {
+            return null;
+        } else {
+            return optionalUser.get();
+        }
+    }
+
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -48,8 +63,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-       return userRepository.findAll();
+        return userRepository.findAll();
     }
+
     private String getEmailOfConnectedUser() {
         String email = null;
         SecurityContext context = SecurityContextHolder.getContext();
@@ -65,4 +81,32 @@ public class UserServiceImpl implements UserService {
     public User getLoggedUser() {
         return userRepository.findByEmail(getEmailOfConnectedUser()).get();
     }
+
+    @Override
+    public List<User> findFriends(User user) {
+        return null;
+    }
+
+    public void deleteFriend(Integer id){
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        User existUser = findUserById(user.getId());
+        if(existUser != null){
+            existUser.setBalance(user.getBalance());
+            existUser.setLastName(user.getLastName());
+            existUser.setFirstName(user.getFirstName());
+            userRepository.save(existUser);
+        }
+    }
+
+    @Override
+    public void updateBankAccount(BankAccount bankAccount) {
+
+    }
+
+
 }
