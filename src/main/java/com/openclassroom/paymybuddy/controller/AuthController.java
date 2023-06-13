@@ -55,6 +55,7 @@ public class AuthController {
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setBalance(0.0);
+        user.setPassword(userDto.getPassword());
         userService.saveUser(user);
         return "redirect:/register?success";
     }
@@ -68,7 +69,7 @@ public class AuthController {
                 .map((user) -> mapToUserDto( user))
                 .collect(Collectors.toList());
         model.addAttribute("users", users);
-        return "users";
+        return "/users";
     }
 
     // handler method to handle login request

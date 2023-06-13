@@ -1,6 +1,4 @@
 package com.openclassroom.paymybuddy.service.impl;
-
-import com.openclassroom.paymybuddy.dto.UserDto;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.UserRepository;
 import com.openclassroom.paymybuddy.service.UserService;
@@ -10,16 +8,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -48,8 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-       return userRepository.findAll();
+        return userRepository.findAll();
     }
+
     private String getEmailOfConnectedUser() {
         String email = null;
         SecurityContext context = SecurityContextHolder.getContext();

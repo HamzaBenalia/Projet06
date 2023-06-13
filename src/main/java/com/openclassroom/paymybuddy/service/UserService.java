@@ -1,7 +1,5 @@
 package com.openclassroom.paymybuddy.service;
-
 import com.openclassroom.paymybuddy.model.User;
-
 import java.util.List;
 
 public interface UserService {
@@ -12,9 +10,7 @@ public interface UserService {
 
     List<User> findAll();
 
-  User getLoggedUser();
-
-
+    User getLoggedUser();
 
 
 }

@@ -1,0 +1,157 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" class="h-100"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Pay My Buddy</title>
+</head>
+
+<body>
+
+<!-- SECTION -->
+<div class="d-flex p-2 container-fluid justify-content-center">
+    <div class="row">
+        <div class=" col-12 col-lg-12">
+            <div class="card my-3 shadow">
+                <div class="card-body">
+                    <div class="flex-row justify-content-between"><h2 class="mt-4">Mes contactes</h2>
+                        <h3 class="mt-4 text-right">
+                            <th:block></th:block>
+                        </h3>
+                    </div>
+
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="text-left">User name</th>
+                            <th class="text-left">Email</th>
+                            <th class="text-left">Phone</th>
+                            <th class="text-left"></th>
+                            <th class="text-left"></th>
+                            <th class="text-left"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="contact: ${contacts}">
+                            <td th:text="${contact.firstName+' '+contact.lastName}"></td>
+                            <td th:text="${contact.email}"></td>
+                            <td th:text="${contact.phone}"></td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-secondary btn-sm"
+                                   onclick="">
+                                    Send message
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/user/transfer}"
+                                   class="btn btn-primary btn-sm"
+                                   onclick="">
+                                    Send money
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/user/delete-contact(id=${contact.userID})}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="if(!(confirm('Are you sure you want to delete this contact ?'))) return false">
+                                    delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:each="contact: ${contactsOf}">
+                            <td th:text="${contact.firstName+' '+contact.lastName}"></td>
+                            <td th:text="${contact.email}"></td>
+                            <td th:text="${contact.phone}"></td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-secondary btn-sm"
+                                   onclick="">
+                                    Send message
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/user/transfer}"
+                                   class="btn btn-primary btn-sm"
+                                   onclick="">
+                                    Send money
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{/user/delete-contact(id=${contact.userID})}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="if(!(confirm('Are you sure you want to delete this contact ?'))) return false">
+                                    delete
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <h4 class="form-signup-heading">Add new contact</h4>
+                        <div th:if="${param.success}">
+                            <div class="alert alert-info">
+                                Great ! you have successfully add a friend!
+                            </div>
+                        </div>
+                        <form class="form-signup d-flex justify-content-around align-items-center" method="post"
+                              role="form"
+                              th:action="@{/friend}"
+                              th:object="${friendDto}"
+                        >
+                            <div class="form-group col-md-8">
+                                <label for="email"></label>
+                                <input th:value="${email}" type="email" class="form-control" name="email" id="email"
+                                       placeholder="Search by email only" required=true>
+                                <p th:errors = "*{email}" class="text-danger"
+                                th:if="${#fields.hasErrors('email')}"></p>
+
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-md btn-success align-center">Add contact</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<div class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item"><a href="#" class="text-dark">About</a></li>
+                    <li class="list-inline-item text-dark">&middot;</li>
+                    <li class="list-inline-item"><a href="#" class="text-dark">Terms of use</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
