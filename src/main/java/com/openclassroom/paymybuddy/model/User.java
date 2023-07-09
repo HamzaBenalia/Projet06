@@ -1,4 +1,5 @@
 package com.openclassroom.paymybuddy.model;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,13 +18,13 @@ public class User {
     @Column(name = "ID", updatable = false)
     private Integer id;
 
-    @Column(name= "FIRST_NAME", nullable = false)
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
     @Column(name = "LAST_NAME", nullable = false)
-    private String lastName ;
+    private String lastName;
 
-    @Column(name ="EMAIL", updatable = false, nullable = false, unique = true)
+    @Column(name = "EMAIL", updatable = false, nullable = false, unique = true)
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
@@ -37,11 +38,11 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER_SENDER")
-    private List<Transactions> transactionSend;
+    private List<Transaction> transactionSend;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER_RECEIVER")
-    private List<Transactions> transactionReceive;
+    private List<Transaction> transactionReceive;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "idUser")
     private List<Relations> relations;

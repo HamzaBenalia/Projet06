@@ -8,9 +8,9 @@ import java.util.List;
 public interface RelationsService {
 
 
-   AddFriendResult addFriend(String friendEmail);
+    AddFriendResult addFriend(String friendEmail);
 
-   List<Integer> getUserFriendsId(Integer userId);
+    List<Integer> getUserFriendsId(Integer userId);
 
-   boolean removeFriend(Integer userId, Integer friendId);
+    boolean removeFriend(Integer userId, Integer friendId);
 }

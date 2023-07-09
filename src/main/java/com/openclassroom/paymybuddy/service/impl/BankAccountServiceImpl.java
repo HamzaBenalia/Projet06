@@ -22,11 +22,12 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public void saveBankAccount(BankAccount bankAccount) {
-        if(bankAccount.getAmount() == null){
+        if (bankAccount.getAmount() == null) {
             bankAccount.setAmount(0.0);
         }
         bankAccountRepository.save(bankAccount);
     }
+
 
     @Override
     public BankAccount findBankAccountByIban(String iban) {

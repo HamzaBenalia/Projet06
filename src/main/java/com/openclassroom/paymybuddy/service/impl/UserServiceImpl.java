@@ -1,4 +1,5 @@
 package com.openclassroom.paymybuddy.service.impl;
+
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.UserRepository;
@@ -82,20 +83,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(getEmailOfConnectedUser()).get();
     }
 
-    @Override
-    public List<User> findFriends(User user) {
-        return null;
-    }
-
-    public void deleteFriend(Integer id){
-        userRepository.deleteById(id);
-    }
 
     @Override
     @Transactional
     public void updateUser(User user) {
         User existUser = findUserById(user.getId());
-        if(existUser != null){
+        if (existUser != null) {
             existUser.setBalance(user.getBalance());
             existUser.setLastName(user.getLastName());
             existUser.setFirstName(user.getFirstName());
@@ -104,9 +97,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateBankAccount(BankAccount bankAccount) {
-
+    public List<User> findUserByIds(List<Integer> ids) {
+        return userRepository.findAllById(ids);
     }
-
-
 }

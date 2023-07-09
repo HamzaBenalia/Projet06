@@ -1,19 +1,16 @@
 package com.openclassroom.paymybuddy.controller;
-import com.openclassroom.paymybuddy.dto.BankAccountDto;
-import com.openclassroom.paymybuddy.dto.CreditDto;
-import com.openclassroom.paymybuddy.dto.DebitDto;
-import com.openclassroom.paymybuddy.dto.FriendDto;
-import com.openclassroom.paymybuddy.model.AddFriendResult;
+import com.openclassroom.paymybuddy.forms.BankAccountForm;
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.service.BankAccountService;
 import com.openclassroom.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -25,16 +22,30 @@ public class BankAccountController {
     @Autowired
     private BankAccountService bankAccountService;
 
+
     @GetMapping("/bank")
     public String showBankAccount(Model model) {
-        // create model object to store form data
-        BankAccountDto bankAccountDto = new BankAccountDto();
-        model.addAttribute("bankAccountDto", bankAccountDto);
+        User user = userService.getLoggedUser();
+        boolean hasBankAccount = bankAccountService.findByUserId(user.getId()) != null;
+        model.addAttribute("hasBankAccount", hasBankAccount);
+        model.addAttribute("bankAccountForm", new BankAccountForm());
         return "bank";
     }
 
+    /*@GetMapping("/bank")
+    public String showBankAccount(Model model) {
+        // create model object to store form data
+        BankAccountForm bankAccountForm = new BankAccountForm();
+        model.addAttribute("bankAccountForm", bankAccountForm);
+        User user = userService.getLoggedUser();
+        // Vérifier si l'utilisateur a déjà un compte bancaire enregistré
+        boolean hasBankAccount = bankAccountService.findByUserId(user.getId()) != null;
+        model.addAttribute("hasBankAccount", hasBankAccount);
+        return "bank";
+    }*/
+
     @PostMapping("/bank")
-    public String saveBankAccount(@Valid @ModelAttribute("bankAccountDto") BankAccountDto bankAccountDto,
+    public String saveBankAccount(@Valid @ModelAttribute("bankAccountForm") BankAccountForm bankAccountForm,
                                   BindingResult result,
                                   Model model) {
         User user = userService.getLoggedUser();
@@ -42,7 +53,7 @@ public class BankAccountController {
         if (bankAccountService.findByUserId(user.getId()) != null) {
             result.rejectValue("iban", "", "You already have a bank account.");
         }
-        BankAccount existingBankIban = bankAccountService.findBankAccountByIban(bankAccountDto.getIban());
+        BankAccount existingBankIban = bankAccountService.findBankAccountByIban(bankAccountForm.getIban());
 
         if (existingBankIban != null) {
             result.rejectValue("iban", "", "There is already an account registered with the same IBAN." +
@@ -52,55 +63,28 @@ public class BankAccountController {
             return "bank";
         }
         BankAccount bankAccount = new BankAccount();
-        bankAccount.setIban(bankAccountDto.getIban());
-        bankAccount.setAmount(Double.parseDouble(bankAccountDto.getSold()));
+        bankAccount.setIban(bankAccountForm.getIban());
+        bankAccount.setAmount(Double.parseDouble(bankAccountForm.getSold()));
         bankAccount.setUser(user);
         bankAccountService.saveBankAccount(bankAccount);
-        return "users";
-
+        return "redirect:/bank?success";
     }
 
-    @GetMapping("/debitAccount")
-    public String showdebitForm(Model model) {
-        // create model object to store form data
-        DebitDto debitDto = new DebitDto();
-        model.addAttribute("debitDto", debitDto);
-        return "debitAccount";
-    }
+    @PostMapping("/bank/update")
+    public String updateBankAccount(@Valid @ModelAttribute("bankAccountForm") BankAccountForm bankAccountForm,
+                                    BindingResult result,
+                                    Model model) {
+        User user = userService.getLoggedUser();
+        BankAccount existingBankAccount = bankAccountService.findByUserId(user.getId());
 
-    @PostMapping("/debitAccount")
-    public String debitAccount(@Valid @ModelAttribute("debitDto") DebitDto debitDto,
-                               BindingResult result,
-                               Model model) {
-        double amount = Double.parseDouble(debitDto.getAmount());
-        boolean debitSuccess = bankAccountService.debitAccount(amount);
-        if (debitSuccess) {
-            return "redirect:/debitAccount?success";
-        } else {
-            return "redirect:/debitAccount?failed";
+        if (existingBankAccount != null) {
+            existingBankAccount.setIban(bankAccountForm.getIban());
+            bankAccountService.saveBankAccount(existingBankAccount);
+            return "redirect:/bank?success";
         }
 
-    }
+        // Gérer le cas où aucun compte bancaire existant n'est trouvé
 
-    @GetMapping("/creditAccount")
-    public String showCreditForm(Model model) {
-        // create model object to store form data
-        CreditDto creditDto = new CreditDto();
-        model.addAttribute("creditDto", creditDto);
-        return "creditAccount";
-    }
-
-    @PostMapping("/creditAccount")
-    public String debitAccount(@Valid @ModelAttribute("creditDto") CreditDto creditDto,
-                               BindingResult result,
-                               Model model) {
-
-        double amount = Double.parseDouble(creditDto.getAmount());
-        boolean creditSuccess = bankAccountService.creditAccount(amount);
-        if (creditSuccess) {
-            return "redirect:/creditAccount?success";
-        } else {
-            return "redirect:/creditAccount?failed";
-        }
+        return "redirect:/bank";
     }
 }

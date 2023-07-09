@@ -1,6 +1,8 @@
 package com.openclassroom.paymybuddy.service;
+
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
+
 import java.util.List;
 
 public interface UserService {
@@ -17,12 +19,8 @@ public interface UserService {
 
     User getLoggedUser();
 
-
-    List<User> findFriends(User user);
-
-    void deleteFriend(Integer id);
-
     void updateUser(User user);
 
-    void updateBankAccount(BankAccount bankAccount);
+    List<User> findUserByIds(List<Integer> ids);
+
 }

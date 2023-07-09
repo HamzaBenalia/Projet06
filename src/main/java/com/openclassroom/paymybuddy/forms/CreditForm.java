@@ -1,4 +1,4 @@
-package com.openclassroom.paymybuddy.dto;
+package com.openclassroom.paymybuddy.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreditDto {
+public class CreditForm {
     @NotBlank(message = "amount must not be blank")
     private String amount;
 }

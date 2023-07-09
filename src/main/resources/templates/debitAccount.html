@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Débiter le compte bancaire</title>
+    <meta charset="UTF-8">
+    <title>Débiter le compte bancaire</title>
 </head>
 <body>
 <h1>Débiter le compte bancaire</h1>
-<div th:if="${param.success}">
-  <div class="alert alert-info">
-    Great ! you have successfully debited your account
-  </div>
-</div>
-
 <div th:if="${param.failed}">
-  <div class="alert alert-danger">
-   your account has nnt enough money to make a debit
-  </div>
+    <div class="alert alert-danger">
+        your account has nnt enough money to make a debit
+    </div>
 </div>
 <form th:action="@{/debitAccount}" method="post">
-  <div>
-    <label for="amount">Amount :</label>
-    <input type="number" id="amount" name="amount" step="0.01" required />
-  </div>
-  <button type="submit">Débiter le compte</button>
+    <div>
+        <label for="amount">Amount :</label>
+        <input type="number" id="amount" name="amount" step="0.01" required/>
+    </div>
+    <button type="submit">Débiter le compte</button>
 </form>
 </body>
 </html>

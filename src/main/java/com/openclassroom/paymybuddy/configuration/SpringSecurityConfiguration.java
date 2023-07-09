@@ -1,10 +1,8 @@
 package com.openclassroom.paymybuddy.configuration;
-
 import com.openclassroom.paymybuddy.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,6 +38,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Defining the passwordEncoder here, to avoid plain-text manipulations
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
+
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/register**",

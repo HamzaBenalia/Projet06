@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org" class="h-100"
-      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+>
 
 
 <head>
@@ -17,10 +17,10 @@
 <!-- SECTION -->
 <div class="d-flex p-2 container-fluid justify-content-center">
     <div class="row">
-        <div class=" col-12 col-lg-12">
+        <div class=" col-12 col-12 lg-12">
             <div class="card my-3 shadow">
                 <div class="card-body">
-                    <div class="flex-row justify-content-between"><h2 class="mt-4">Mes contactes</h2>
+                    <div class="flex-row justify-content-between"><h2 class="mt-4">My friends_connections</h2>
                         <h3 class="mt-4 text-right">
                             <th:block></th:block>
                         </h3>
@@ -31,7 +31,6 @@
                         <tr>
                             <th class="text-left">User name</th>
                             <th class="text-left">Email</th>
-                            <th class="text-left">Phone</th>
                             <th class="text-left"></th>
                             <th class="text-left"></th>
                             <th class="text-left"></th>
@@ -43,46 +42,17 @@
                                 <td th:text="${user.firstName+' '+user.lastName}"></td>
                                 <td th:text="${user.email}"></td>
                                 <td>
-                                    <a class="btn btn-danger" th:href="@{/deleteFriend/{friendId}(friendId=${user.id})}" role="button">Supprimer l'ami</a>
+                                    <a class="btn btn-danger" th:href="@{/deleteFriend/{friendId})}"
+                                       role="button">Supprimer l'ami</a>
 
-                                </td>
-
-                                <td>
-                                    <a th:href="@{/user/transfer}"
-                                       class="btn btn-primary btn-sm"
-                                       onclick="">
-                                        Send money
-                                    </a>
                                 </td>
                             </tr>
                         </div>
-
-                        <tr th:each="contact: ${contactsOf}">
-                            <td th:text="${contact.firstName+' '+contact.lastName}"></td>
-                            <td th:text="${contact.email}"></td>
-                            <td th:text="${contact.phone}"></td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-secondary btn-sm"
-                                   onclick="">
-                                    Send message
-                                </a>
-                            </td>
-                            <td>
-                                <a th:href="@{/user/transfer}"
-                                   class="btn btn-primary btn-sm"
-                                   onclick="">
-                                    Send money
-                                </a>
-                            </td>
-                            <td>
-                                <a th:href="@{/user/deleteFriend(id=$friend.ID})}"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="if(!(confirm('Are you sure you want to delete this contact ?'))) return false">
-                                    delete
-                                </a>
-                            </td>
-                        </tr>Fr
+                        </tr>
                         </tbody>
-
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>

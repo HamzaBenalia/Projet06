@@ -1,4 +1,5 @@
 package com.openclassroom.paymybuddy.service.impl;
+
 import com.openclassroom.paymybuddy.model.AddFriendResult;
 import com.openclassroom.paymybuddy.model.Relations;
 import com.openclassroom.paymybuddy.model.User;

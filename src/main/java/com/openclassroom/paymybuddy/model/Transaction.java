@@ -10,9 +10,10 @@ import java.time.Instant;
 @AllArgsConstructor
 @Entity
 @Table(name = "TRANSACTIONS")
-public class Transactions {
+public class Transaction {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false)
     private Integer id;
 
@@ -31,5 +32,12 @@ public class Transactions {
     @Column(name = "FEE")
     private Double fee;
 
+    @Transient
+    private User userReceiver;
 
+    @Transient
+    private String type;
+
+    @Transient
+    private String formattedDate;
 }

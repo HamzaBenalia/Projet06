@@ -6,12 +6,6 @@
 </head>
 <body>
 <h1>Créditer le compte bancaire</h1>
-<div th:if="${param.success}">
-  <div class="alert alert-info">
-    Great ! you have successfully credited your bank Account
-  </div>
-</div>
-
 <div th:if="${param.failed}">
   <div class="alert alert-danger">
    your Pay My Buddy Balance has not enough money to make a credit to your Bank Account
