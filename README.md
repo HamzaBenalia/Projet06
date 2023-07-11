@@ -17,4 +17,15 @@ The users in "Pay My Buddy" App, are called "Buddies That is from where the name
 
 ![Modélisation physique des données](https://github.com/HamzaBenalia/Projet06/assets/99022185/2f31128b-6035-4d6d-b76f-6734f922fc5a)
 
+## Application.properties
+You can custom the application by editing the `application.properties` file in the main/resources folder.
+1. `server.port= [number]` : sets the local port of the web application : spring.datasource.url=jdbc:mysql://localhost:portNumber/paymybuddy
+
+## Starting the application
+In the root folder, open a command prompt (**cmd.exe**) and type the following command to start the application : `mvn spring-boot:run`
+If the database was properly setup, the application should start. <br>
+Otherwise, you will need to check your the ports, the password of the database if any etc...
+The url of the application is set at : [http://localhost:8080](http://localhost:8080)
+
+
 
