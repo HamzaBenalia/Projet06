@@ -21,10 +21,10 @@ The users in "Pay My Buddy" App, are called "Buddies That is from where the name
 
 **To set up your dataBase please, follow these steps below  :**
 
-Create a new database called paymybuddy with the following command : CREATE DATABASE paymybuddy;
-Import the schema.sql file (in the main/resources folder) to create the tables
-Import the data.sql file (Optional) if you want to test the fucntionalities of the dataBase.
-Ps : data.sql is a prefilled file with a ready data to be tested.
+Create a new database called paymybuddy with the following command : CREATE DATABASE paymybuddy;<br/>
+-Import the schema.sql file (in the main/resources folder) to create the tables
+-Import the data.sql file (Optional) if you want to test the fucntionalities of the dataBase.
+-Ps : data.sql is a prefilled file with a ready data to be tested.
 
 ## Application.properties
 You can custom the application by editing the `application.properties` file in the main/resources folder.
