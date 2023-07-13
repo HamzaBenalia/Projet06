@@ -10,7 +10,7 @@ The users in "Pay My Buddy" App, are called "Buddies That is from where the name
        
 ## UML Diag of classes
 
-![UML diag de classe](https://github.com/HamzaBenalia/Projet06/assets/99022185/6bfedf66-2bd3-4edf-aa72-9aca5cb14c63)
+![UML diag de classe](https://github.com/HamzaBenalia/Projet06/assets/99022185/8f3c6164-1a51-4056-8f68-1990ef79c6ad)
 
 
 ## The physical model of the Data
