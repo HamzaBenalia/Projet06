@@ -19,7 +19,7 @@ The users in "Pay My Buddy" App, are called "Buddies That is from where the name
 
 ## Set up the DataBase "Pay My Buddy"
 
-**To set up your dataBase please, follow these steps below ** :
+**To set up your dataBase please, follow these steps below  :**
 
 Create a new database called paymybuddy with the following command : CREATE DATABASE paymybuddy;
 Import the schema.sql file (in the main/resources folder) to create the tables
