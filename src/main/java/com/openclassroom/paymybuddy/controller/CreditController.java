@@ -4,6 +4,7 @@ import com.openclassroom.paymybuddy.forms.CreditForm;
 import com.openclassroom.paymybuddy.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 @Controller
+@EnableTransactionManagement
 public class CreditController {
 
 

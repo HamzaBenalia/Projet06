@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
-     List<Transaction> findTransactionByIdUserSender (Integer idUserSender);
-     List<Transaction> findTransactionByIdUserReceiver (Integer idUserReceiver);
+    List<Transaction> findTransactionByIdUserSender(Integer idUserSender);
+
+    List<Transaction> findTransactionByIdUserReceiver(Integer idUserReceiver);
 }

@@ -13,6 +13,6 @@ public class BankAccountForm {
 
     @NotBlank(message = "Iban must not be blank")
     private String iban;
-   @NotBlank(message = "sold is required")
+    @NotBlank(message = "sold is required")
     private String sold;
 }

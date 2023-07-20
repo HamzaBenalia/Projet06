@@ -1,7 +1,9 @@
 package com.openclassroom.paymybuddy.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.Instant;
 

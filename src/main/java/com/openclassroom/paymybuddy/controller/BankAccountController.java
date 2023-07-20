@@ -1,4 +1,5 @@
 package com.openclassroom.paymybuddy.controller;
+
 import com.openclassroom.paymybuddy.forms.BankAccountForm;
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
@@ -79,6 +80,7 @@ public class BankAccountController {
 
         if (existingBankAccount != null) {
             existingBankAccount.setIban(bankAccountForm.getIban());
+            existingBankAccount.setAmount(Double.parseDouble(bankAccountForm.getSold()));
             bankAccountService.saveBankAccount(existingBankAccount);
             return "redirect:/bank?success";
         }

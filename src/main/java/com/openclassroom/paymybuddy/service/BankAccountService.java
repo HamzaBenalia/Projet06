@@ -17,4 +17,6 @@ public interface BankAccountService {
     boolean debitAccount(double amount);
 
     boolean creditAccount(double amount);
+
+    void updateBankAccount();
 }

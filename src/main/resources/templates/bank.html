@@ -4,123 +4,114 @@
     <div th:insert="fragments/bootstrap :: configuration"></div>
 </head>
 <body>
-<div class="container">
-    <div th:insert="fragments/header :: header"></div>
+    <div class="container">
+        <div th:insert="fragments/header :: header"></div>
 
-    <div class="row col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">Register My Bank Account</h2>
-            </div>
-            <div th:if="${param.success}">
-                <div class="alert alert-info">
-                    Great! You have successfully saved a bank Account!
+        <div class="row"><span class="border border-success"></span>
+             <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-left">Register My Bank Account</h2>
+                    </div>
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info">
+                            Great! You have successfully saved a bank Account!
+                        </div>
+                    </div>
+
+                    <div th:if="${hasBankAccount}">
+                        <!-- Compte bancaire existant en mode "Modification" -->
+                        <form method="post" role="form" th:action="@{/bank/update}" th:object="${bankAccountForm}">
+                            <!-- Champs du formulaire en mode "Modification" -->
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Iban</label>
+                                <input th:field="${bankAccountForm.iban}" type="iban" class="form-control" id="iban" name="iban"
+                                       placeholder="Enter your new iban" required="true"/>
+
+                                <p th:errors="*{iban}" class="text-danger" th:if="${#fields.hasErrors('iban')}"></p>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Sold</label>
+                                <input th:field="${bankAccountForm.sold}" type="sold" class="form-control" id="sold" name="sold"
+                                       placeholder="Enter your new sold" required="true"/>
+
+                                <p th:errors="*{sold}" class="text-danger" th:if="${#fields.hasErrors('sold')}"></p>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Update My Account</button>
+                            </div>
+                        </form>
+                        <!-- Menus ou boutons pour débiter/créditer le compte bancaire vers le compte virtuel -->
+                        <!-- ... -->
+                    </div>
+
+                    <div th:unless="${hasBankAccount}">
+                        <!-- Formulaire de création de compte bancaire -->
+                        <form method="post" role="form" th:action="@{/bank}" th:object="${bankAccountForm}">
+                            <!-- Champs du formulaire -->
+                            <div class="form-group mb-3">
+                                <label class="form-label">Iban</label>
+                                <input th:field="${bankAccountForm.iban}" type="iban" class="form-control" id="iban" name="iban"
+                                       placeholder="Enter your iban" required="true"/>
+
+                                <p th:errors="*{iban}" class="text-danger" th:if="${#fields.hasErrors('iban')}"></p>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label">Sold</label>
+                                <input th:field="${bankAccountForm.sold}" type="sold" class="form-control" id="sold" name="sold"
+                                       placeholder="Enter your sold" required="true"/>
+
+                                <p th:errors="*{sold}" class="text-danger" th:if="${#fields.hasErrors('sold')}"></p>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Save My Account</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <div th:if="${hasBankAccount}">
-                <!-- Compte bancaire existant en mode "Modification" -->
-                <form method="post" role="form" th:action="@{/bank/update}" th:object="${bankAccountForm}">
-                    <!-- Champs du formulaire en mode "Modification" -->
-
-
-                    <!-- ... -->
-
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Update My Account</button>
+            <div class="row col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Debit My Bank Account</h2>
                     </div>
-                </form>
-                <!-- Menus ou boutons pour débiter/créditer le compte bancaire vers le compte virtuel -->
-                <!-- ... -->
+                    <div th:if="${param.failed}">
+                        <div class="alert alert-danger">
+                            your account has not enough money to make a debit
+                        </div>
+                    </div>
+                    <form th:action="@{/debitAccount}" method="post">
+                        <div>
+                            <label for="amount">Amount :</label>
+                            <input type="number" id="amount" name="amount" step="0.01" required/>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Debit my Bank Account</button>
+                    </form>
+                </div>
             </div>
 
-            <div th:unless="${hasBankAccount}">
-                <!-- Formulaire de création de compte bancaire -->
-                <form method="post" role="form" th:action="@{/bank}" th:object="${bankAccountForm}">
-                    <!-- Champs du formulaire -->
-                    <div class="form-group mb-3">
-                        <label class="form-label">Iban</label>
-                        <input th:field="${bankAccountForm.iban}" type="iban" class="form-control" id="iban" name="iban"
-                               placeholder="Enter your iban" required="true"/>
-
-                        <p th:errors="*{iban}" class="text-danger" th:if="${#fields.hasErrors('iban')}"></p>
+            <div class="row col-md-6 offset-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Credit My Bank Account</h2>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label class="form-label">Sold</label>
-                        <input th:field="${bankAccountForm.sold}" type="sold" class="form-control" id="sold" name="sold"
-                               placeholder="Enter your sold" required="true"/>
-
-                        <p th:errors="*{sold}" class="text-danger" th:if="${#fields.hasErrors('sold')}"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Save My Account</button>
-                    </div>
-                </form>
-            </div>
-
-
-            <!--            <div class="card-body">-->
-            <!--                <div th:if="${not hasBankAccount}">-->
-            <!--                    &lt;!&ndash; Formulaire de création de compte bancaire &ndash;&gt;-->
-            <!--                    <form method="post" role="form" th:action="@{/bank}" th:object="${bankAccountForm}">-->
-            <!--                        &lt;!&ndash; Champs du formulaire &ndash;&gt;-->
-            <!--                        <div class="form-group mb-3">-->
-            <!--                            <label class="form-label">Iban</label>-->
-            <!--                            <input th:field="${bankAccountForm.iban}" type="iban"-->
-            <!--                                   class="form-control"-->
-            <!--                                   id="iban"-->
-            <!--                                   name="iban"-->
-            <!--                                   placeholder="Enter your iban" required="true"/>-->
-
-
-            <!--                            <p th:errors="*{iban}" class="text-danger" th:if="${#fields.hasErrors('iban')} and ${#fields.hasErrors()}"></p>-->
-
-            <!--                        </div>-->
-
-            <!--                        <div class="form-group">-->
-            <!--                            <button class="btn btn-primary" type="submit">Save My Account</button>-->
-
-            <!--                        </div>-->
-            <!--                    </form>-->
-            <!--                </div>-->
-            <!--                <div th:if="${hasBankAccount}">-->
-            <!--                    &lt;!&ndash; Compte bancaire existant en mode "Modification" &ndash;&gt;-->
-            <!--                    <form method="post" role="form" th:action="@{/bank}" th:object="${bankAccountForm}">-->
-            <!--                        &lt;!&ndash; Champs du formulaire en mode "Modification" &ndash;&gt;-->
-            <!--                        &lt;!&ndash; ... &ndash;&gt;-->
-
-            <!--                        <div class="form-group">-->
-            <!--                            <button class="btn btn-primary" type="submit">Update My Account</button>-->
-            <!--                        </div>-->
-            <!--                    </form>-->
-            <!--                    &lt;!&ndash; Menus ou boutons pour débiter/créditer le compte bancaire vers le compte virtuel &ndash;&gt;-->
-            <!--                    &lt;!&ndash; ... &ndash;&gt;-->
-            <!--                </div>-->
-            <!--            </div>-->
-        </div>
-    </div>
-
-    <div class="row col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">Debited My Bank Account</h2>
-            </div>
             <div th:if="${param.failed}">
                 <div class="alert alert-danger">
-                    your account has nnt enough money to make a debit
+                    your Pay My Buddy Balance has not enough money to make a credit to your Bank Account
                 </div>
             </div>
-            <form th:action="@{/debitAccount}" method="post">
-                <div>
-                    <label for="amount">Amount :</label>
-                    <input type="number" id="amount" name="amount" step="0.01" required/>
-                </div>
-                <button class="btn btn-primary" type="submit">débiter le compte</button>
-            </form>
-        </div>
-    </div>
-</div>
-</body>
+                <form th:action="@{/creditAccount}" method="post">
+                    <div>
+                        <label for="amount">Amount :</label>
+                        <input type="number" id="amount" name="amount" step="0.01" required />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Credit My Bank Account</button>
+                </form>
+    </body>
 </html>

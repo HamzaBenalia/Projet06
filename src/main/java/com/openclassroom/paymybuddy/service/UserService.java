@@ -1,6 +1,5 @@
 package com.openclassroom.paymybuddy.service;
 
-import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 
 import java.util.List;

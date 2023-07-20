@@ -1,6 +1,5 @@
 package com.openclassroom.paymybuddy.service.impl;
 
-import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.UserRepository;
 import com.openclassroom.paymybuddy.service.UserService;

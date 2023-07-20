@@ -1,20 +1,21 @@
 package com.openclassroom.paymybuddy.controller;
+
 import com.openclassroom.paymybuddy.dto.TransactionDto;
 import com.openclassroom.paymybuddy.model.CreateTransactionResult;
-import com.openclassroom.paymybuddy.model.Transaction;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.service.RelationsService;
+import com.openclassroom.paymybuddy.service.TransactionService;
 import com.openclassroom.paymybuddy.service.UserService;
-import com.openclassroom.paymybuddy.service.impl.TransactionService;
+import com.openclassroom.paymybuddy.service.impl.TransactionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transaction")
-    public String saveTransaction(@Valid @ModelAttribute("transactionDto") TransactionDto transactionDto, BindingResult result, Model model) {
+    public String saveTransaction(@Valid @ModelAttribute("transactionDto") TransactionDto transactionDto, BindingResult result, Model model, HttpSession httpSession) {
         double amount = Double.parseDouble(transactionDto.getAmount());
         Integer idUserReceiver = transactionDto.getIdUserReceiver();
         CreateTransactionResult createTransactionResult = transactionService.saveTransaction(idUserReceiver, amount);
@@ -56,14 +57,13 @@ public class TransactionController {
             transactionDto.setFriends(friends);
             return "transaction";
         } else {
+            User user = userService.getLoggedUser();
+            if (user.getBalance() == null) {
+                httpSession.setAttribute("balance", 0);
+            } else {
+                httpSession.setAttribute("balance", user.getBalance());
+            }
             return "redirect:/transaction?success";
         }
     }
-
-  /*  @GetMapping("/user/{idUserSender}/transactions")
-    public List<Transaction> getTransactionsByUserId(@PathVariable Integer idUserSender) {
-        return transactionService.findTransactionByIdSender(idUserSender);
-    }
-
-   */
 }

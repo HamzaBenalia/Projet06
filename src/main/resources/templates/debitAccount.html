@@ -5,10 +5,10 @@
     <title>Débiter le compte bancaire</title>
 </head>
 <body>
-<h1>Débiter le compte bancaire</h1>
+<h1>Debit your Bank Account </h1>
 <div th:if="${param.failed}">
     <div class="alert alert-danger">
-        your account has nnt enough money to make a debit
+        your Bank account has not enough money to make a debit
     </div>
 </div>
 <form th:action="@{/debitAccount}" method="post">
@@ -16,7 +16,7 @@
         <label for="amount">Amount :</label>
         <input type="number" id="amount" name="amount" step="0.01" required/>
     </div>
-    <button type="submit">Débiter le compte</button>
+    <button type="submit">debit the account</button>
 </form>
 </body>
 </html>

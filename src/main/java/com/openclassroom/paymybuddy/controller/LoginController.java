@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
 
-
     // handler method to handle list of users
 //    @GetMapping("/users")
 //    public String users(Model model) {

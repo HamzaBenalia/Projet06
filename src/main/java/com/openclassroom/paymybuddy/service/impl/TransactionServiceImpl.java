@@ -5,9 +5,9 @@ import com.openclassroom.paymybuddy.model.Transaction;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.TransactionRepository;
 import com.openclassroom.paymybuddy.service.RelationsService;
+import com.openclassroom.paymybuddy.service.TransactionService;
 import com.openclassroom.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.standard.InstantFormatter;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TransactionService{
+public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private UserService userService;
@@ -76,17 +76,17 @@ public class TransactionService{
     public List<Transaction> findTransactionByIdSender(Integer idUser) {
         List<Transaction> transactions = transactionRepository.findTransactionByIdUserSender(idUser);
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-        if(transactions != null && !transactions.isEmpty()){
-            transactions.forEach(transaction ->{
+        if (transactions != null && !transactions.isEmpty()) {
+            transactions.forEach(transaction -> {
                 transaction.setUserReceiver(userService.findUserById(transaction.getIdUserReceiver()));
                 transaction.setType("send");
                 transaction.setFormattedDate(formatter.format(Date.from(transaction.getDate())));
             });
         }
         List<Transaction> transactionReceivs = transactionRepository.findTransactionByIdUserReceiver(idUser);
-        if(transactionReceivs != null && !transactionReceivs.isEmpty()){
+        if (transactionReceivs != null && !transactionReceivs.isEmpty()) {
             User user = userService.findUserById(idUser);
-            transactionReceivs.forEach(transaction ->{
+            transactionReceivs.forEach(transaction -> {
                 transaction.setUserReceiver(user);
                 transaction.setType("receive");
                 transaction.setFormattedDate(formatter.format(Date.from(transaction.getDate())));

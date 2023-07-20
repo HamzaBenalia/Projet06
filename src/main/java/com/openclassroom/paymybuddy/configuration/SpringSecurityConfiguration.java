@@ -57,5 +57,4 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID", "REMEMBERSESSION")
                 .and().csrf().disable();
     }
-
 }

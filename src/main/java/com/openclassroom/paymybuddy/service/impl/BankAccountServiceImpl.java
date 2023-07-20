@@ -79,4 +79,16 @@ public class BankAccountServiceImpl implements BankAccountService {
         }
         return false;
     }
+
+    public void updateBankAccount() {
+        User user = userService.getLoggedUser();
+        BankAccount bankAccount = bankAccountRepository.findByUserId(user.getId());
+
+        if (bankAccount != null) {
+            user.setBankAccount(bankAccount);
+            userService.updateUser(user);
+            bankAccountRepository.save(bankAccount);// Sauvegarder les modifications de l'utilisateur
+        }
+    }
+
 }
