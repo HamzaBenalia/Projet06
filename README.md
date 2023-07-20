@@ -10,7 +10,7 @@ Pay My Buddy is a web application that will help the users of this aplication to
 <br>
 
 ## UML Diagram
-![UML diag de classe](https://github.com/HamzaBenalia/Projet06/assets/99022185/e5344371-c944-48ae-b2ef-9e588780e431)
+![Benalia_Hamza_1_UML_062023](https://github.com/HamzaBenalia/Projet06/assets/99022185/24f43461-145c-4c97-97f2-c542d2a03984)
 
 
 **Relations** ℹ️
