@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.controller;
-
 import com.openclassroom.paymybuddy.model.Transaction;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.service.RelationsService;
