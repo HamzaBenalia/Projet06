@@ -10,8 +10,8 @@ Pay My Buddy is a web application that will help the users of this aplication to
 <br>
 
 ## UML Diagram
+![UML diag de classe](https://github.com/HamzaBenalia/Projet06/assets/99022185/e5344371-c944-48ae-b2ef-9e588780e431)
 
-![UML diag de classe](https://github.com/HamzaBenalia/Projet06/assets/99022185/fd60eb9c-8d86-4432-8691-02c65c3fc06d)
 
 **Relations** ℹ️
 - One user can only have one bank account.
