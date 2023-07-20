@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.service.impl;
-
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.UserRepository;
 import com.openclassroom.paymybuddy.service.UserService;
@@ -9,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;

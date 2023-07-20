@@ -1,7 +1,5 @@
 package com.openclassroom.paymybuddy.model;
-
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.List;
 

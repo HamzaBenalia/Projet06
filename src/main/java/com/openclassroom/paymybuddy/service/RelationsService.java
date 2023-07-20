@@ -1,10 +1,6 @@
 package com.openclassroom.paymybuddy.service;
-
-
 import com.openclassroom.paymybuddy.model.AddFriendResult;
-
 import java.util.List;
-
 public interface RelationsService {
 
 

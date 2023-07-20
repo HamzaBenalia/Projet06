@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.controller;
-
 import com.openclassroom.paymybuddy.dto.FriendDto;
 import com.openclassroom.paymybuddy.model.AddFriendResult;
 import com.openclassroom.paymybuddy.model.Relations;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;

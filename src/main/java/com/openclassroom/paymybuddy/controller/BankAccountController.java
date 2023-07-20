@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.controller;
-
 import com.openclassroom.paymybuddy.forms.BankAccountForm;
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
@@ -33,17 +32,6 @@ public class BankAccountController {
         return "bank";
     }
 
-    /*@GetMapping("/bank")
-    public String showBankAccount(Model model) {
-        // create model object to store form data
-        BankAccountForm bankAccountForm = new BankAccountForm();
-        model.addAttribute("bankAccountForm", bankAccountForm);
-        User user = userService.getLoggedUser();
-        // Vérifier si l'utilisateur a déjà un compte bancaire enregistré
-        boolean hasBankAccount = bankAccountService.findByUserId(user.getId()) != null;
-        model.addAttribute("hasBankAccount", hasBankAccount);
-        return "bank";
-    }*/
 
     @PostMapping("/bank")
     public String saveBankAccount(@Valid @ModelAttribute("bankAccountForm") BankAccountForm bankAccountForm,
@@ -84,8 +72,6 @@ public class BankAccountController {
             bankAccountService.saveBankAccount(existingBankAccount);
             return "redirect:/bank?success";
         }
-
-        // Gérer le cas où aucun compte bancaire existant n'est trouvé
 
         return "redirect:/bank";
     }

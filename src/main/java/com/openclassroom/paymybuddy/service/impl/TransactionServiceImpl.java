@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.service.impl;
-
 import com.openclassroom.paymybuddy.model.CreateTransactionResult;
 import com.openclassroom.paymybuddy.model.Transaction;
 import com.openclassroom.paymybuddy.model.User;
@@ -9,7 +8,6 @@ import com.openclassroom.paymybuddy.service.TransactionService;
 import com.openclassroom.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -97,6 +95,4 @@ public class TransactionServiceImpl implements TransactionService {
         return transactions;
 
     }
-
-
 }

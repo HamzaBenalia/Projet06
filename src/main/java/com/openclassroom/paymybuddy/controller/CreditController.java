@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.controller;
-
 import com.openclassroom.paymybuddy.forms.CreditForm;
 import com.openclassroom.paymybuddy.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +41,4 @@ public class CreditController {
             return "redirect:/creditAccount?failed";
         }
     }
-
 }

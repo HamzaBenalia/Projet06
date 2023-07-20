@@ -1,10 +1,8 @@
 package com.openclassroom.paymybuddy.model;
-
 import com.openclassroom.paymybuddy.model.compositekeys.RelationId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Data

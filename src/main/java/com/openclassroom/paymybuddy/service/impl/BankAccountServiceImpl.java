@@ -1,5 +1,4 @@
 package com.openclassroom.paymybuddy.service.impl;
-
 import com.openclassroom.paymybuddy.model.BankAccount;
 import com.openclassroom.paymybuddy.model.User;
 import com.openclassroom.paymybuddy.repository.BankAccountRepository;
@@ -7,7 +6,6 @@ import com.openclassroom.paymybuddy.service.BankAccountService;
 import com.openclassroom.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -90,5 +88,4 @@ public class BankAccountServiceImpl implements BankAccountService {
             bankAccountRepository.save(bankAccount);// Sauvegarder les modifications de l'utilisateur
         }
     }
-
 }
